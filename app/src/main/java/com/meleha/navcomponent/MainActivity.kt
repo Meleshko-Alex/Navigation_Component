@@ -19,7 +19,9 @@ import com.meleha.navcomponent.ui.screens.LocalNavController
 import com.meleha.navcomponent.ui.screens.add.AddItemScreen
 import com.meleha.navcomponent.ui.screens.items.ItemsScreen
 import com.meleha.navcomponent.ui.theme.NavigationComponentTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
