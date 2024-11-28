@@ -12,8 +12,10 @@ navVersion = "2.8.4"
 kspVersion = "2.0.0-1.0.21"
 hiltVersion = "2.51.1"
 hiltNavCompose = "1.2.0"
+ktxSerialization = "1.6.3"
 
 [libraries]
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref= "ktxSerialization"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android" , version.ref = "hiltVersion"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hiltVersion"}
 hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose" , version.ref = "hiltNavCompose"}
@@ -40,4 +42,5 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 

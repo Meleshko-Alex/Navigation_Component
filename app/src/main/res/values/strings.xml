@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Navigation Component</string>
     <string name="add">Add</string>
+    <string name="edit">Edit</string>
     <string name="enter_new_item">Enter new item</string>
+    <string name="edit_item">Edit item</string>
     <string name="items_screen">Items</string>
     <string name="add_item_screen">Add item</string>
+    <string name="edit_item_screen">Edit item</string>
 </resources>

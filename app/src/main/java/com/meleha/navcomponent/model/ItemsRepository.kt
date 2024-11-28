@@ -11,9 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ItemsRepository @Inject constructor(
-    @ApplicationContext private val context: Context,
-) {
+class ItemsRepository @Inject constructor() {
 
     private val itemsFlow =
         MutableStateFlow(List(size = 5) { "Item ${it + 1}" })
@@ -25,5 +23,17 @@ class ItemsRepository @Inject constructor(
 
     fun getItems(): Flow<List<String>> {
         return itemsFlow.onStart { delay(3000) }
+    }
+
+    suspend fun getByIndex(index: Int): String {
+        delay(1000)
+        return itemsFlow.value[index]
+    }
+
+    suspend fun update(index: Int, newTitle: String) {
+        delay(2000)
+        itemsFlow.update { oldList ->
+            oldList.toMutableList().apply { set(index, newTitle) }
+        }
     }
 }

@@ -25,6 +25,7 @@ import com.meleha.navcomponent.ui.screens.AddItemRoute
 import com.meleha.navcomponent.ui.screens.EventConsumer
 import com.meleha.navcomponent.ui.screens.LocalNavController
 import com.meleha.navcomponent.ui.screens.add.AddItemViewModel.ScreenState
+import com.meleha.navcomponent.ui.screens.routeClass
 
 @Composable
 fun AddItemScreen() {
@@ -36,7 +37,7 @@ fun AddItemScreen() {
     )
     val navController = LocalNavController.current
     EventConsumer(viewModel.exitChannel) {
-        if (navController.currentBackStackEntry?.destination?.route == AddItemRoute) {
+        if (navController.currentBackStackEntry.routeClass() == AddItemRoute::class) {
             navController.popBackStack()
         }
     }
