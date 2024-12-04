@@ -13,8 +13,10 @@ kspVersion = "2.0.0-1.0.21"
 hiltVersion = "2.51.1"
 hiltNavCompose = "1.2.0"
 ktxSerialization = "1.6.3"
+ktxImmutableColections = "0.3.7"
 
 [libraries]
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref= "ktxImmutableColections"}
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref= "ktxSerialization"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android" , version.ref = "hiltVersion"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hiltVersion"}

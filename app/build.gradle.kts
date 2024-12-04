@@ -52,6 +52,7 @@ android {
 
 dependencies {
 
+    implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.hilt.android)
     implementation(libs.hilt.compose)
