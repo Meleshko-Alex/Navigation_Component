@@ -9,4 +9,7 @@
     <string name="edit_item_screen">Edit item</string>
     <string name="settings_screen">Settings</string>
     <string name="profile_screen">Profile</string>
+    <string name="try_again">Try again</string>
+    <string name="failed_to_load_data">Failed to load data</string>
+    <string name="already_exists_in_the_list">\'%1$s\' already exists in the list</string>
 </resources>
