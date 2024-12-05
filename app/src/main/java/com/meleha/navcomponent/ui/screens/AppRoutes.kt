@@ -2,6 +2,7 @@ package com.meleha.navcomponent.ui.screens
 
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination
+import androidx.navigation.navDeepLink
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
 
@@ -16,11 +17,22 @@ data object ItemsGraph {
     @Serializable
     data class EditItemRoute(
         val index: Int
-    )
+    ) {
+        companion object {
+            val Link = navDeepLink {
+                uriPattern = "nav://items/{index}"
+            }
+        }
+    }
 }
 
 @Serializable
 data object SettingsGraph {
+
+    val Link = navDeepLink {
+        uriPattern = "nav://settings"
+    }
+
     @Serializable
     data object SettingsRoute
 }
