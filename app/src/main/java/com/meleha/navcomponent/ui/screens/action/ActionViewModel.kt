@@ -8,6 +8,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ActionViewModel<State, Action>(
@@ -17,11 +18,8 @@ class ActionViewModel<State, Action>(
     private val _stateFlow = MutableStateFlow<LoadResult<State>>(LoadResult.Loading)
     var stateFlow: StateFlow<LoadResult<State>> = _stateFlow
 
-    private val _errorChanel = Channel<Exception>()
-    val errorChanel: ReceiveChannel<Exception> = _errorChanel
-
-    private val _exitChanel = Channel<Unit>()
-    val exitChanel: ReceiveChannel<Unit> = _exitChanel
+    private val _screenStateFlow = MutableStateFlow(ScreenState())
+    var screenStateFlow: StateFlow<ScreenState> = _screenStateFlow
 
     init {
         load()
@@ -47,8 +45,22 @@ class ActionViewModel<State, Action>(
                 goBack()
             } catch (e: Exception) {
                 hideProgress()
-                _errorChanel.send(e)
+                _screenStateFlow.update { oldState ->
+                    oldState.copy(error = e)
+                }
             }
+        }
+    }
+
+    fun onExitHandled() {
+        _screenStateFlow.update { oldState ->
+            oldState.copy(exit = null)
+        }
+    }
+
+    fun onErrorHandled() {
+        _screenStateFlow.update { oldState ->
+            oldState.copy(error = null)
         }
     }
 
@@ -60,8 +72,10 @@ class ActionViewModel<State, Action>(
         _stateFlow.tryUpdate(delegate::hideProgress)
     }
 
-    private suspend fun goBack() {
-        _exitChanel.send(Unit)
+    private fun goBack() {
+        _screenStateFlow.update { oldState ->
+            oldState.copy(exit = Unit)
+        }
     }
 
     interface Delegate<State, Action> {
@@ -70,4 +84,9 @@ class ActionViewModel<State, Action>(
         fun hideProgress(input: State): State
         suspend fun execute(action: Action)
     }
+
+    data class ScreenState(
+        val exit: Unit? = null,
+        val error: Exception? = null,
+    )
 }
